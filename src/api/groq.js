@@ -1,7 +1,7 @@
 import Groq from "groq-sdk";
 
 const groq = new Groq({
-  apiKey: "",
+  apiKey: process.env.REACT_APP_GROQ_API_KEY,
   dangerouslyAllowBrowser: true
 });
 
@@ -14,7 +14,7 @@ export async function main() {
 export async function groqChat(query) {
   const prompt = `
   INSTRUCTIONS:
-  1. Do not add ay introductory exclamations or greetings.
+  1. Do not add any introductory exclamations or greetings.
   2. Do not ask any concluding questions.
   3. Do not provide summaries at the end.
 
