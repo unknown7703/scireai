@@ -7,6 +7,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { contextMenuLookup, groqChat } from "../api/groq.js";
 import Navbar from "./Navbar.js";
 import ChatBubble from "./ChatBubble.jsx";
+import fileicon from "../assets/fileicon.svg";
 
 function Main() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -100,26 +101,19 @@ function Main() {
   }, []);
 
   return (
-    <div className="app-container" style={{ display: "flex", height: "100vh" }}>
-      <div
-        className="left-panel"
-        style={{
-          flex: 3,
-          display: "flex",
-          flexDirection: "column",
-          borderRight: "1px solid #ccc",
-        }}
-      >
+    <div className="flex h-screen font-montserrat">
+      <div className="flex flex-grow flex-col w-[50%] ">
         {pdfFile ? (
           <>
-            <Navbar
-              zoomPluginInstance={zoomPluginInstance}
-              pageNavigationPluginInstance={pageNavigationPluginInstance}
-              handleRemovePdf={handleRemovePdf}
-            />
+            <div>
+              <Navbar
+                zoomPluginInstance={zoomPluginInstance}
+                pageNavigationPluginInstance={pageNavigationPluginInstance}
+                handleRemovePdf={handleRemovePdf}
+              />
+            </div>
             <div
-            className="flex overflow-auto"
-            
+              className="flex overflow-auto"
               onContextMenu={handleContextMenu}
             >
               <Worker
@@ -133,13 +127,29 @@ function Main() {
             </div>
           </>
         ) : (
-          <div style={{ padding: "20px" }}>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={handleFileChange}
-              className="mt-4"
-            />
+          <div className="flex p-14 w-full h-full justify-center items-center">
+            <div className="border-2 p-1 w-full h-full flex justify-center items-center bg-gradient-to-r from-blue-500 via-cyan-500 to-violet-500 rounded-2xl">
+              <div className="flex h-full w-full justify-center bg-white rounded-2xl px-4 items-center back font-medium flex-col gap-1">
+                <p className="font-semibold text-4xl">Upload Your File</p>
+                <p className="font-extralight text-md mb-4">
+                  supported type- .pdf
+                </p>
+                <img src={fileicon} alt="File Icon" className="w-[10%] mb-4" />
+                <label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={handleFileChange}
+                    class="text-sm text-grey-500
+              file:mr-5 file:py-2 file:px-6
+              file:rounded-full file:border-0
+              file:text-sm file:font-medium
+              file:bg-blue-50 file:text-blue-700
+              hover:file:cursor-pointer"
+                  />
+                </label>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -147,37 +157,39 @@ function Main() {
         className="right-panel"
         style={{ flex: 1, padding: "20px", overflow: "auto" }}
       >
-        <div className="w-[100%] mx-auto h-[100%] rounded-lg flex flex-col justify-between p-4 bg-white shadow-lg dark:bg-[#212121]">
-          <div className="flex-grow overflow-y-auto mb-4 space-y-2">
-            {chatHistory.map((chat, index) => (
-              <ChatBubble
-                key={index}
-                sender={chat.sender}
-                message={chat.message}
+        <div className="w-[100%] mx-auto h-[100%] rounded-lg flex flex-col justify-between p-1 bg-white shadow-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-violet-500">
+          <div className="flex h-full w-full bg-white rounded-lg px-1 items-center back flex-col">
+            <div className="flex-grow overflow-y-auto mb-4 space-y-2 w-full p-2 text-xs">
+              {chatHistory.map((chat, index) => (
+                <ChatBubble
+                  key={index}
+                  sender={chat.sender}
+                  message={chat.message}
+                />
+              ))}
+            </div>
+            <div className="flex dark:bg-[#2F2F2F] justify-self-end self-end w-full rounded-lg mb-1">
+              <input
+                type="text"
+                value={userInput}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                className="flex-grow p-2 border border-gray-300 rounded-l focus:outline-none text-black"
               />
-            ))}
-          </div>
-          <div className="flex dark:bg-[#2F2F2F]">
-            <input
-              type="text"
-              value={userInput}
-              onChange={handleInputChange}
-              onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
-              className="flex-grow p-2 border border-gray-300 rounded-l focus:outline-none dark:bg-[#2F2F2F] text-white"
-            />
-            <button
-              onClick={handleSendMessage}
-              className="bg-blue-500 text-white p-2 rounded-r hover:bg-blue-600 transition-colors"
-            >
-              Send
-            </button>
+              <button
+                onClick={handleSendMessage}
+                className="bg-blue-200 text-blue-700 p-2 rounded-r hover:bg-blue-600 transition-colors"
+              >
+                Send
+              </button>
+            </div>
           </div>
         </div>
       </div>
       {contextMenuVisible && (
         <div
-          className="context-menu"
+          className="rounded-sm"
           style={{
             position: "absolute",
             top: `${contextMenuPosition.y}px`,
@@ -190,7 +202,7 @@ function Main() {
           }}
           onClick={handleMenuClick}
         >
-          <p>Print the word selected</p>
+          <p className="text-sm">Ask ScireAI</p>
         </div>
       )}
     </div>
