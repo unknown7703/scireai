@@ -5,12 +5,6 @@ const groq = new Groq({
   dangerouslyAllowBrowser: true
 });
 
-export async function main() {
-  const prompt = "What is the best way to go about literature reviews?";
-  const chatCompletion = await groqChat(prompt);
-  console.log(chatCompletion.choices[0]?.message?.content || "");
-}
-
 export async function groqChat(query) {
   const prompt = `
   INSTRUCTIONS:
@@ -64,5 +58,3 @@ export async function contextMenuLookup(text) {
     model: "llama3-8b-8192",
   });
 }
-
-main();

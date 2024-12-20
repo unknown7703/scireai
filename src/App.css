@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.text-justify {
+  text-align: justify;
+}
+
+.markdown p {
+  margin-bottom: 1em; /* Adjust the spacing as needed */
+}
