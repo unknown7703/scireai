@@ -5,7 +5,7 @@ const ChatBubble = ({ sender, message }) => {
   const isUser = sender === 'user';
   
   const chatBubbleClass = isUser ? ' text-left bg-blue-600 dark:bg-[#2F2F2F] text-white' : 'bg-gray-200 text-left';
-  const chatBubbleUserName = isUser ? 'User' : 'SCIRE';
+  const chatBubbleUserName = isUser ? 'User' : 'ScireAI';
 
   const components = {
     text: ({ node, ...props }) => {

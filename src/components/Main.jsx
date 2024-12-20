@@ -160,6 +160,11 @@ function Main() {
         <div className="w-[100%] mx-auto h-[100%] rounded-lg flex flex-col justify-between p-1 bg-white shadow-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-violet-500">
           <div className="flex h-full w-full bg-white rounded-lg px-1 items-center back flex-col">
             <div className="flex-grow overflow-y-auto mb-4 space-y-2 w-full p-2 text-xs">
+            {chatHistory.length === 0 && (
+            <div className="justify-self-center self-center flex items-center justify-center text-gray-400 text-2xl">
+              Ask ScireAI
+            </div>
+          )}
               {chatHistory.map((chat, index) => (
                 <ChatBubble
                   key={index}
