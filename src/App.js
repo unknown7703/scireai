@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { zoomPlugin } from "@react-pdf-viewer/zoom";
 import { pageNavigationPlugin } from "@react-pdf-viewer/page-navigation";
-import ReactMarkdown from "react-markdown";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "./App.css";
@@ -94,11 +93,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    if (chatRef.current) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
-    }
-  }, [chatHistory]);
+  
   useEffect(() => {
     document.addEventListener("click", () => setContextMenuVisible(false));
     return () => {
@@ -155,7 +150,7 @@ function App() {
       >
         <div className="w-[100%] mx-auto h-[100%] rounded-lg flex flex-col justify-between p-4 bg-white shadow-lg dark:bg-[#212121]">
           <div
-            ref={chatRef}
+            
             className="flex-grow overflow-y-auto mb-4 space-y-2"
           >
             {chatHistory.map((chat, index) => (
