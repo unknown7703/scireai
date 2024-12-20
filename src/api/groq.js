@@ -1,6 +1,9 @@
 import Groq from "groq-sdk";
 
-const groq = new Groq({ apiKey: "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" });
+const groq = new Groq({
+  apiKey: "",
+  dangerouslyAllowBrowser: true
+});
 
 export async function main() {
   const prompt = "What is the best way to go about literature reviews?";
