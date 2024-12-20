@@ -5,8 +5,8 @@ const Navbar = ({ zoomPluginInstance, pageNavigationPluginInstance, handleRemove
   const { CurrentPageLabel } = pageNavigationPluginInstance;
 
   return (
-    <div className="navbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', borderBottom: '1px solid #ccc' }}>
-      <div>
+    <div className="w-[40%] z-10 flex flex-row justify-between items-center bg-slate-600/30 rounded-full py-1 px-8 m-4">
+      <div className='flex flex-row'>
         <ZoomOutButton />
         <ZoomInButton />
       </div>
