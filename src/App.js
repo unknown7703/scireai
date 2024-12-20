@@ -6,13 +6,14 @@ import ReactMarkdown from "react-markdown";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "./App.css";
-import { contextMenuLookup } from "./api/groq.js";
+import { contextMenuLookup ,groqChat} from "./api/groq.js";
 import Navbar from "./Navbar.js";
 import ChatBubble from "./components/ChatBubble.jsx";
 
 function App() {
   const [pdfFile, setPdfFile] = useState(null);
   const [chatHistory, setChatHistory] = useState([]);
+  const [userInput, setUserInput] = useState(''); 
   const [tempSelectedText, setTempSelectedText] = useState("");
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({
@@ -54,7 +55,29 @@ function App() {
       { sender, message },
     ]);
   };
-  
+  //USER INPUT
+  const handleSendMessage =async()=>{
+    setUserInput('');
+    try{
+      const response=await groqChat(userInput);
+      if (userInput.trim() === "") return;
+      addMessageToChatHistory("user", userInput);
+      const result = response.choices[0]?.message?.content || "No response";
+      addMessageToChatHistory("bot",result);
+    } catch(error){
+      console.error("Error in fetching data:", error);
+      addMessageToChatHistory("bot","Error in fetching data");
+    }
+  }
+  const handleInputChange = (e) => {
+    setUserInput(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
   // CONTEXT MENU CLICK
   const handleMenuClick = async () => {
     setContextMenuVisible(false);
@@ -143,7 +166,7 @@ function App() {
               />
             ))}
           </div>
-          {/* <div className="flex dark:bg-[#2F2F2F]">
+          <div className="flex dark:bg-[#2F2F2F]">
             <input
               type="text"
               value={userInput}
@@ -158,7 +181,7 @@ function App() {
             >
               Send
             </button>
-          </div> */}
+          </div>
         </div>
       </div>
       {contextMenuVisible && (
