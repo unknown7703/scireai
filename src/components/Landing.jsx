@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import heroImage from "../assets/hero.svg";
-import feat1Video from '../assets/feat1.webm';
+import feat1Video from '../assets/feature 1.webm';
+import feat2Video from '../assets/feature 2.webm';
+import feat3Video from '../assets/feature 3.webm';
 import mainlogo from '../assets/logomain.svg';
 const Landing = () => {
   return (
@@ -38,10 +40,10 @@ const Landing = () => {
         }}
       >
         <div className="bg-blue-200/20 p-10 drop-shadow-md rounded-2xl backdrop-blur-md w-[70%]">
-          <h1 className=" max-w-[80%] justify-self-center text-center text-7xl font-bold">Reimagine the way you research with <p className="italic font-extrabold">ScireAI</p></h1>
+          <h1 className=" max-w-[80%] justify-self-center text-center text-6xl font-bold">Accelerate your speed of reading  <p className="italic font-extrabold">research papers</p></h1>
           
           <p className="text-white stroke-slate-900 text-lg max-w-[70%] mt-8 tracking-wide text-center justify-self-center">
-          Research faster without leaving the window with AI-powered features like Look Up and Chat          </p>
+          Research faster without leaving the window with AI-powered features like Term Look Up and Chat  </p>
           <div className="flex justify-center mt-14">
             <Link
               to="/main"
@@ -55,33 +57,39 @@ const Landing = () => {
 
       {/* Features Carousel */}
       <section className="flex flex-col items-center justify-center mt-48 mb-44 my-8">
-        <h2 className="text-4xl text-black tracking-wide font-bold mb-16">Our Features </h2>
-        <Carousel
-          showThumbs={false}
-          infiniteLoop
-          useKeyboardArrows
-          autoPlay
-          showStatus={false}
-          interval={5000} // 5 seconds delay
-          className="w-[90%] md:w-2/3 "
-        >
-          <div className="p-4 bg-[#FCBF22] rounded-lg text-white">
-            <h3 className="text-xl font-semibold my-2 mb-8">Feature 1</h3>
-            <video className="w-full rounded-lg" autoPlay muted loop playbackRate="2">
+        <h2 className="text-6xl text-black tracking-wide font-bold mb-16">Our Features</h2>
+        <div className="flex px-16 justify-between gap-2 flex-row">
+          <div className="p-2 bg-[#0062CC] rounded-lg text-white max-w-[32%]">
+          <video className="w-[80%] justify-self-center mt-8 mb-2 rounded-xl" autoPlay muted loop playbackRate="2">
               <source src={feat1Video} type="video/webm" />
               Your browser does not support the video tag.
             </video>
+            <h3 className="text-3xl justify-self-center font-semibold my-2 mb-6 ">Term Lookup</h3>
+            <p className="justify-self-center mb-4 text-lg max-w-[60%] text-center">Just right click and understand complex terms instantly, without leaving your window.</p>
+            
           </div>
-          <div className="p-4 bg-[#FA575A] rounded-lg">
-            <h3 className="text-xl font-bold">Feature 2</h3>
-            <p>Description of Feature 2</p>
+          <div className="p-4 bg-[#0062CC] rounded-lg text-white max-w-[32%]">
+          <video className="w-[80%] justify-self-center mt-8 mb-2 rounded-xl" autoPlay muted loop playbackRate="2">
+              <source src={feat2Video} type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
+            <h3 className="text-3xl justify-self-center font-semibold my-2 mb-6 ">Chat with AI</h3>
+            <p className="justify-self-center mb-4 text-lg max-w-[60%] text-center">Chat seamlessly with ScireAI, right where you read your papers</p>
+            
           </div>
-          <div className="p-4 bg-[#0077FC] rounded-lg">
-            <h3 className="text-xl font-bold">Feature 3</h3>
-            <p>Description of Feature 3</p>
+          <div className="p-4 bg-[#0062CC] rounded-lg text-white max-w-[32%]">
+          <video className="w-[80%] justify-self-center mt-8 mb-2 rounded-xl" autoPlay muted loop playbackRate="2">
+              <source src={feat3Video} type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
+            <h3 className="text-3xl justify-self-center font-semibold my-2 mb-6 ">Frictionless and Intuitive</h3>
+            <p className="justify-self-center mb-4 text-lg max-w-[60%] text-center">Frictionless and intuitive, SciraAI simplifies research with effortless, seamless usability</p>
+            
           </div>
-        </Carousel>
+          </div>
       </section>
+      <div className="justify-self-center"><p >made by </p></div>
+      
     </div>
   );
 };
