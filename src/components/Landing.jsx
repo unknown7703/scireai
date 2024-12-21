@@ -55,7 +55,7 @@ const Landing = () => {
 
       {/* Features Carousel */}
       <section className="flex flex-col items-center justify-center mt-48 mb-44 my-8">
-        <h2 className="text-4xl text-black tracking-wide font-medium mb-16 italic">Our Features !</h2>
+        <h2 className="text-4xl text-black tracking-wide font-bold mb-16">Our Features </h2>
         <Carousel
           showThumbs={false}
           infiniteLoop
