@@ -58,3 +58,29 @@ export async function contextMenuLookup(text) {
     model: "llama3-8b-8192",
   });
 }
+
+export async function chatWithPageContext(text,query) {
+  const prompt = `
+  INSTRUCTIONS:
+  1. Do not add ay introductory exclamations or greetings.
+  2. Do not ask any concluding questions.
+  3. Do not provide summaries at the end.
+
+  PROMPT:
+  You are assisting a researcher by answering the query with relevance to given context provided below
+  CONTEXT: ${text}
+  QUERY: ${query}`;
+  return groq.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: "You are an AI assistant that helps researchers.",
+      },
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+    model: "llama3-8b-8192",
+  });
+}
