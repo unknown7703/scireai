@@ -1,42 +1,80 @@
-# Getting Started with Create React App
+# Scire AI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Scire AI is a research assistant AI designed to enhance your research experience. With Scire AI, you can upload PDF files, select text you don’t understand, and ask AI for explanations—all within the same window.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **PDF Viewer:** Open and read any PDF file in the app.
+- **Text Selection & AI Assistance:** Highlight text in the PDF, right-click, and query the AI for clarification.
+- **Integrated AI Chat:** Chat with AI in a dedicated panel for seamless interaction.
 
-### `npm start`
+## Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🔗 [Scire AI Demo](https://scireai.vercel.app/)  
+Experience the functionality of Scire AI in a simulated environment.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+Follow the instructions below to set up Scire AI locally.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js (v16 or later)
+- npm (v7 or later)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Steps
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:unknown7703/scireai.git
+   ```
+   ```bash
+   cd scire-ai
+   ```
+   ```bash
+   npm install
+   ```
+2. Make an Llm key from groq (https://groq.com/) add .env in root with key name given in groq.js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Initiliaze tailwind with
+   ```bash
+   tailwind init -y
+   ```
 
-### `npm run eject`
+4. Start your application in local port
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Usage
+1. **Upload a PDF:** Click "Upload Your File" and select a PDF document.
+2. **Select Text:** Highlight any text you wish to query.
+3. **Ask AI:** Right-click and choose to query AI. Responses will appear in the chat panel.
+
+## Technologies Used
+
+- **Frontend:**
+  - React.js
+  - @react-pdf-viewer/core
+  - Tailwind CSS
+- **LLMs**
+  - llama3-8b-8192 hosted on groq
+- **Hosting**
+  - Vercel
+
+## Folder Structure
+
+    Scire-AI/
+    ├── public/
+    ├── src/
+    │   ├── assets/         # Icons and images
+    │   ├── components/     # Reusable components (Navbar, ChatBubble, etc.)
+    │   ├── api/            # API integrations
+    │   ├── App.js          # Main application file
+    │   ├── index.js        # React entry point
+    ├── package.json
 
 
