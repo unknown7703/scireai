@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
+//import { pdfjs, Document, Page } from "@react-pdf";
 import { zoomPlugin } from "@react-pdf-viewer/zoom";
 import { pageNavigationPlugin } from "@react-pdf-viewer/page-navigation";
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -9,6 +10,7 @@ import Navbar from "./Navbar.js";
 import ChatBubble from "./ChatBubble.jsx";
 import fileicon from "../assets/fileicon.svg";
 //import { Link } from "react-router-dom";
+//pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
 
 function Main() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -130,8 +132,8 @@ function Main() {
           </>
         ) : (
           <div className="flex p-4 w-full h-full justify-center items-center">
-            <div className="border-2 p-1 w-full h-full flex justify-center items-center bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-800 rounded-3xl">
-              <div className="flex h-full w-full justify-center bg-white rounded-3xl px-4 items-center back font-medium flex-col gap-1">
+           
+              <div className="flex h-full w-full justify-center border-4 border-blue-500 bg-white rounded-2xl px-4 items-center back font-medium flex-col gap-1">
                 <p className="font-semibold text-4xl">Upload Your File</p>
                 <p className="font-extralight text-md mb-4">
                   supported type- .pdf
@@ -151,7 +153,7 @@ function Main() {
                   />
                 </label>
                 {/* <div className="bg-blue-50 text-blue-700 px-6 py-2 rounded-full mt-6"><Link to="/">Home</Link></div> */}
-              </div>
+              
             </div>
           </div>
         )}
@@ -160,8 +162,7 @@ function Main() {
         className="right-panel"
         style={{ flex: 1, padding: "20px", overflow: "auto" }}
       >
-        <div className="w-[100%] mx-auto h-[100%] rounded-3xl flex flex-col justify-between p-1 bg-white shadow-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-800">
-          <div className="flex h-full w-full bg-white rounded-3xl px-1 items-center back flex-col">
+          <div className="flex h-full w-full bg-white border-4 border-blue-500 rounded-2xl px-1 items-center back flex-col">
             <div className="flex-grow overflow-y-auto mb-4 space-y-2 w-full p-2 text-xs">
             {chatHistory.length === 0 && (
             <div className="justify-self-center self-center flex items-center justify-center mt-20 text-gray-400 text-2xl">
@@ -176,23 +177,23 @@ function Main() {
                 />
               ))}
             </div>
-            <div className="flex  justify-self-end self-end w-full rounded-3xl mb-2">
+            <div className="flex  justify-self-end self-end w-full rounded-3xl mb-2 ">
               <input
                 type="text"
                 value={userInput}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 placeholder="Type Your Queries..."
-                className="flex-grow p-2 border border-gray-300 rounded-l-2xl focus:outline-none text-black"
+                className="flex-grow p-2 border border-gray-300 rounded-l-xl focus:outline-none text-black"
               />
               <button
                 onClick={handleSendMessage}
-                className="bg-blue-200 text-blue-700 p-2 rounded-r-3xl hover:bg-blue-600 hover:text-white transition-colors"
+                className="bg-blue-200 text-blue-700 p-2 rounded-r-xl hover:bg-blue-600 hover:text-white transition-colors"
               >
                 Send
               </button>
             </div>
-          </div>
+          
         </div>
       </div>
       {contextMenuVisible && (
