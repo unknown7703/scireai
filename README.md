@@ -38,7 +38,7 @@ Follow the instructions below to set up Scire AI locally.
 
 3. Initiliaze tailwind with
    ```bash
-   tailwind init -y
+   npx tailwindcss init
    ```
 
 4. Start your application in local port
