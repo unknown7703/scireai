@@ -29,7 +29,7 @@ Follow the instructions below to set up Scire AI locally.
    git clone git@github.com:unknown7703/scireai.git
    ```
    ```bash
-   cd scire-ai
+   cd scireai
    ```
    ```bash
    npm install
