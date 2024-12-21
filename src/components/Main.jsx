@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
-//import { pdfjs, Document, Page } from "@react-pdf";
 import { zoomPlugin } from "@react-pdf-viewer/zoom";
 import { pageNavigationPlugin } from "@react-pdf-viewer/page-navigation";
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -10,7 +9,7 @@ import Navbar from "./Navbar.js";
 import ChatBubble from "./ChatBubble.jsx";
 import fileicon from "../assets/fileicon.svg";
 //import { Link } from "react-router-dom";
-//pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
+
 
 function Main() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -22,7 +21,7 @@ function Main() {
     x: 0,
     y: 0,
   });
-
+  const chatRef = useRef(null);
   const zoomPluginInstance = zoomPlugin();
   const pageNavigationPluginInstance = pageNavigationPlugin();
   // PDF HANDLE
@@ -57,25 +56,38 @@ function Main() {
       ...prevChatHistory,
       { sender, message },
     ]);
+    console.log(chatHistory);
   };
-  //USER INPUT
-  const handleSendMessage = async () => {
-    setUserInput("");
-    try {
-      const response = await groqChat(userInput);
-      if (userInput.trim() === "") return;
-      addMessageToChatHistory("user", userInput);
-      const result = response.choices[0]?.message?.content || "No response";
-      addMessageToChatHistory("bot", result);
-    } catch (error) {
-      console.error("Error in fetching data:", error);
-      addMessageToChatHistory("bot", "Error in fetching data");
+  const scrollToBottom = () => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   };
+  //USER INPUT
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
   };
 
+
+  
+  const handleSendMessage = async () => {
+    try {
+      const response = await groqChat(userInput);
+      addMessageToChatHistory("user", userInput);
+      const result = response.choices[0]?.message?.content || "No response";
+      addMessageToChatHistory("bot", result);
+      setUserInput("");
+    } catch (error) {
+      console.error("Error in fetching data:", error);
+      addMessageToChatHistory("bot", "Error in fetching data");
+    } 
+  };
+  
+  
+  const renderUserSelect = () => {
+    addMessageToChatHistory("user", tempSelectedText);
+    
+  };
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSendMessage();
@@ -87,7 +99,6 @@ function Main() {
     try {
       const response = await contextMenuLookup(tempSelectedText);
       if (tempSelectedText.trim() === "") return;
-      addMessageToChatHistory("user", tempSelectedText);
       const result = response.choices[0]?.message?.content || "No response";
       console.log("contextMenuLookup result:", result);
       addMessageToChatHistory("bot", result);
@@ -103,6 +114,15 @@ function Main() {
       document.removeEventListener("click", () => setContextMenuVisible(false));
     };
   }, []);
+  
+  useEffect(() => {
+    if (chatHistory.length > 0) {
+      const latestChat = chatHistory[chatHistory.length - 1];
+      if (latestChat.sender === "user") {
+        scrollToBottom();
+      }
+    }
+  }, [chatHistory]);
 
   return (
     <div className="flex h-screen font-montserrat">
@@ -163,7 +183,7 @@ function Main() {
         style={{ flex: 1, padding: "20px", overflow: "auto" }}
       >
           <div className="flex h-full w-full bg-white border-4 border-blue-500 rounded-2xl px-1 items-center back flex-col">
-            <div className="flex-grow overflow-y-auto mb-4 space-y-2 w-full p-2 text-xs">
+            <div  ref={chatRef} className="flex-grow overflow-y-auto mb-4 space-y-2 w-full p-2 text-xs">
             {chatHistory.length === 0 && (
             <div className="justify-self-center self-center flex items-center justify-center mt-20 text-gray-400 text-2xl">
               Ask ScireAI
@@ -209,7 +229,7 @@ function Main() {
             padding: "10px",
             boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
           }}
-          onClick={handleMenuClick}
+          onClick={()=>{handleMenuClick();renderUserSelect();}}
         >
           <p className="text-sm">Ask ScireAI</p>
         </div>
